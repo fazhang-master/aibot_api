@@ -10,6 +10,9 @@ from .views.remove_videogreenscreen import RemoveVideoGreenScreen
 from .views.crawle_file import CrawerFile
 from rest_framework.routers import DefaultRouter
 from .views.RegisterandLogin import UserViewSet
+from .views.RelaunchVDP import RelaunchVDP
+from .views.background_music import SystemBackgroundMusic, CustomBackgroundMusic
+from .views.backround_videostickers import SystemVideoSticker, CustomVideoSticker
 
 router = DefaultRouter()
 router.register(r'users', UserViewSet, basename='user')
@@ -31,6 +34,14 @@ urlpatterns = [
     path('CrawerFile/', CrawerFile.as_view({'post':'upload','get':'list','delete':'delete_video'})),
 
     path('api/', include(router.urls)),
+
+    path('RelaunchVDP/', RelaunchVDP.as_view({'post':'create'})),
+
+    path('SystemBackgroundMusic/', SystemBackgroundMusic.as_view({'get':'list'})),
+    path('CustomBackgroundMusic/', CustomBackgroundMusic.as_view({'post':'upload','get':'list','delete':'delete_video'})),
+
+    path('SystemVideoSticker/', SystemVideoSticker.as_view({'get':'list'})),
+    path('CustomVideoSticker/', CustomVideoSticker.as_view({'post':'upload','get':'list','delete':'delete_video'})),
 ]
 
 if settings.DEBUG:

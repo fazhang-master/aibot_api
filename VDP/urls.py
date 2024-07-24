@@ -13,6 +13,8 @@ from .views.RegisterandLogin import UserViewSet
 from .views.RelaunchVDP import RelaunchVDP
 from .views.background_music import SystemBackgroundMusic, CustomBackgroundMusic
 from .views.backround_videostickers import SystemVideoSticker, CustomVideoSticker
+from .views.GetAllSystermFile import SystermBackgroundFile
+from .views.GenerateVideo import CreateVideoAPIView
 
 router = DefaultRouter()
 router.register(r'users', UserViewSet, basename='user')
@@ -33,7 +35,7 @@ urlpatterns = [
 
     path('CrawerFile/', CrawerFile.as_view({'post':'upload','get':'list','delete':'delete_video'})),
 
-    path('api/', include(router.urls)),
+    path('', include(router.urls)),
 
     path('RelaunchVDP/', RelaunchVDP.as_view({'post':'create'})),
 
@@ -42,6 +44,10 @@ urlpatterns = [
 
     path('SystemVideoSticker/', SystemVideoSticker.as_view({'get':'list'})),
     path('CustomVideoSticker/', CustomVideoSticker.as_view({'post':'upload','get':'list','delete':'delete_video'})),
+
+    path('SystermBackgroundFile/', SystermBackgroundFile.as_view({'get':'list'})),
+
+    path('CreateVideoAPIView/', CreateVideoAPIView.as_view()),
 ]
 
 if settings.DEBUG:
